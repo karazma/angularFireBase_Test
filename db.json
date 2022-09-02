@@ -1,0 +1,15 @@
+{
+  "posts": [
+    {
+      "id": 2,
+      "productName": "Hulk Eraser",
+      "productPrice": "100.00",
+      "productType": "Tpys",
+      "productQty": "3"
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

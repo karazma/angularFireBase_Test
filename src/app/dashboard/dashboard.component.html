@@ -5,5 +5,72 @@
             <h3>Dashboard Page</h3>
             <p class="text-bold" [innerText]="'Hi '+this.user.userName +' user, Your FireBase tokenID is ' + this.user.localId "></p>
         </div>
-    </div>
+
+        <div class="container-fluid">
+            <div class="d-flex">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Product</button>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="formvalue">
+                            <div class="mb-3">
+                                <label for="txtProductName" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" formControlName="productName" id="txtProductName" placeholder="Product Name">
+                              </div>
+                              <div class="mb-3">
+                                <label for="txtproductPrice" class="form-label">Product Price</label>
+                                <input type="text" class="form-control" formControlName="productPrice" id="txtproductPrice" placeholder="Product Price">
+                              </div>
+                              <div class="mb-4">
+                                <label for="txtproductType" class="form-label">Product Type</label>
+                                <input type="text" class="form-control" formControlName="productType" id="txtproductType" placeholder="Product Type">
+                              </div>
+                              <div class="mb-4">
+                                <label for="txtproductQty" class="form-label">Product Qty</label>
+                                <input type="text" class="form-control" formControlName="productQty" id="txtproductQty" placeholder="Product Qty">
+                              </div>
+                        </form>
+                        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" (click)="postProductDetails()">Add</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Product Qty</th>
+                    <th scope="col">Action Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of productDataObj">
+                    <td>{{row.id}}</td>
+                    <td>{{row.productName}}</td>
+                    <td>{{row.productPrice}}</td>
+                    <td>{{row.productType}}</td>
+                    <td>{{row.productQty}}</td>
+                    <td>
+                      <button style="color: aliceblue;" class="btn btn-info">Edit</button>
+                      <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>   
 </main>
