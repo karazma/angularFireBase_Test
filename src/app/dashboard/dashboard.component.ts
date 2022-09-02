@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   formvalue !: FormGroup;
   productModelObj : productModel = new productModel();
   productDataObj !: any;
+  showAdd !: boolean;
+  showUpdate !: boolean;
 
   user = {localId:"defaultID", userName:"Admin"}
   
@@ -39,6 +41,12 @@ export class DashboardComponent implements OnInit {
         })
         this.getEmployeeAll();
     }
+  }
+
+  clickAddProduct(){
+    this.formvalue.reset();
+    this.showAdd = true;
+    this.showUpdate = false;
   }
 
   postProductDetails(){
@@ -79,4 +87,29 @@ export class DashboardComponent implements OnInit {
       this.getEmployeeAll();
     })
   }
+
+  onEdit(row:any){
+    this.showAdd = false;
+    this.showUpdate = true;
+    
+    this.productModelObj.id=row.id;
+    this.formvalue.controls["productName"].setValue(row.productName);
+    this.formvalue.controls["productPrice"].setValue(row.productPrice);
+    this.formvalue.controls["productType"].setValue(row.productType);
+    this.formvalue.controls["productQty"].setValue(row.productQty);
+  }
+
+updateProductDetails(){
+  this.productModelObj.productName=this.formvalue.value.productName;
+  this.productModelObj.productPrice=this.formvalue.value.productPrice;
+  this.productModelObj.productQty=this.formvalue.value.productQty;
+  this.productModelObj.productType=this.formvalue.value.productType;
+
+  this.api.UpdateEmployee(this.productModelObj, this.productModelObj.id)
+  .subscribe(res=>{
+    alert("updated successfully");
+    this.getEmployeeAll();
+    this.formvalue.reset();
+  })
+}
 }
