@@ -14,6 +14,7 @@ export class ProductapiService {
         return res;
     }))
   }
+  
   GetEmployee(){
     return this.http.get<any>("https://lemellos-product-api.herokuapp.com/product")
     .pipe(map((res:any)=>{
